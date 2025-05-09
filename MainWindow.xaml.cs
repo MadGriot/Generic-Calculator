@@ -55,15 +55,44 @@ public partial class MainWindow : Window
         resultLabel.Content = "0";
     }
 
-    private void SevenButton_Click(object sender, RoutedEventArgs e)
+    private void OperationButton_Click(object sender, RoutedEventArgs e)
     {
+        if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+        {
+            resultLabel.Content = "0";
+        }
+    }
+
+    private void NumberButton_Click(object sender, RoutedEventArgs e)
+    {
+        int selectedValue = 0;
+        if (sender == ZeroButton)
+            selectedValue = 0;
+        if (sender == OneButton)
+            selectedValue = 1;
+        if (sender == TwoButton)
+            selectedValue = 2;
+        if (sender == ThreeButton)
+            selectedValue = 3;
+        if (sender == FourButton)
+            selectedValue = 4;
+        if (sender == FiveButton)
+            selectedValue = 5;
+        if (sender == SixButton)
+            selectedValue = 6;
+        if (sender == SevenButton)
+            selectedValue = 7;
+        if (sender == EightButton)
+            selectedValue = 8;
+        if (sender == NineButton)
+            selectedValue = 9;
         if (resultLabel.Content.ToString() == "0")
         {
-            resultLabel.Content = "7";
+            resultLabel.Content = $"{selectedValue}";
         }
         else
         {
-            resultLabel.Content = $"{resultLabel.Content}7";
+            resultLabel.Content = $"{resultLabel.Content}{selectedValue}";
         }
     }
 }
