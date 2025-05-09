@@ -14,9 +14,27 @@ namespace GenericCalculator;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
+public enum SelectedOperator
+{
+    Addition,
+    Subtraction,
+    Multiplication,
+    Division
+}
+
+public class SimpleMath
+{
+    public static double Add(double num1, double num2) => num1 + num2;
+
+    public static double Substraction(double num1, double num2) => num1 - num2;
+
+    public static double Multiply(double num1, double num2) => num1 * num2;
+    public static double Divide(double num1, double num2) => num1 / num2;
+}
 public partial class MainWindow : Window
 {
     double lastNumber, result;
+    SelectedOperator selectedOperator;
     public MainWindow()
     {
         InitializeComponent();
@@ -29,9 +47,36 @@ public partial class MainWindow : Window
 
     private void EqualButton_Click(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        double newNumber;
+        if (double.TryParse(resultLabel.Content.ToString(), out newNumber))
+        {
+            switch (selectedOperator)
+            {
+                case SelectedOperator.Addition:
+                    result = SimpleMath.Add(lastNumber, newNumber);
+                    break;
+                case SelectedOperator.Subtraction:
+                    result = SimpleMath.Substraction(lastNumber, newNumber);
+                    break;
+                case SelectedOperator.Multiplication:
+                    result = SimpleMath.Multiply(lastNumber, newNumber);
+                    break;
+                case SelectedOperator.Division:
+                    result = SimpleMath.Divide(lastNumber, newNumber);
+                    break;
+            }
+        }
+        resultLabel.Content = result.ToString();
     }
+    private void DecimalButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (resultLabel.Content.ToString().Contains("."))
+        {
 
+        }
+        else 
+            resultLabel.Content = $"{resultLabel.Content}.";
+    }
     private void PercentangeButton_Click(object sender, RoutedEventArgs e)
     {
         if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
@@ -61,6 +106,15 @@ public partial class MainWindow : Window
         {
             resultLabel.Content = "0";
         }
+
+        if (sender == MultiplyButton)
+            selectedOperator = SelectedOperator.Multiplication;
+        if (sender == DivideButton)
+            selectedOperator = SelectedOperator.Division;
+        if (sender == PlusButton)
+            selectedOperator = SelectedOperator.Addition;
+        if (sender == MinusButton)
+            selectedOperator = SelectedOperator.Subtraction;
     }
 
     private void NumberButton_Click(object sender, RoutedEventArgs e)
