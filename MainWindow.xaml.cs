@@ -65,27 +65,8 @@ public partial class MainWindow : Window
 
     private void NumberButton_Click(object sender, RoutedEventArgs e)
     {
-        int selectedValue = 0;
-        if (sender == ZeroButton)
-            selectedValue = 0;
-        if (sender == OneButton)
-            selectedValue = 1;
-        if (sender == TwoButton)
-            selectedValue = 2;
-        if (sender == ThreeButton)
-            selectedValue = 3;
-        if (sender == FourButton)
-            selectedValue = 4;
-        if (sender == FiveButton)
-            selectedValue = 5;
-        if (sender == SixButton)
-            selectedValue = 6;
-        if (sender == SevenButton)
-            selectedValue = 7;
-        if (sender == EightButton)
-            selectedValue = 8;
-        if (sender == NineButton)
-            selectedValue = 9;
+        int selectedValue = int.Parse((sender as Button).Content.ToString());
+
         if (resultLabel.Content.ToString() == "0")
         {
             resultLabel.Content = $"{selectedValue}";
